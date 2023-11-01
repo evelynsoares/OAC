@@ -2,20 +2,19 @@
 blk_in:	.word 0, 1, 2, 3
 blk_out:	.word 0, 0, 0, 0
 keys: 	.word 1, 2, 3, 4, 5, 6
-num:	.word 0x10001 #65537 em hexadecimal
+num:	.word 0x10001 #65537 in hexa
 mask: 	.word 0xffff 
-str: 	.ascii 
 
-.text	#carrega os endereços das palavras da memória para os registradores
+.text	#loades the addresses of the words in the memory to the registers
 	la a0, blk_in
 	la a1, blk_out
 	la a2, keys
 	
-	#carrega as palavras definidas como constantes
+	#loades the words defined with constant value 
 	lw s10, num
 	lw s11, mask
 	
-	#carrega os valores das keys nos registradores
+	#loades the value of the keys to the registers
 	lw s0, 0(a2)
 	lw s1, 4(a2)
 	lw s2, 8(a2)
@@ -23,15 +22,16 @@ str: 	.ascii
 	lw s4, 16(a2)
 	lw s5, 20(a2)
 	
-	#carrega os valores de blk_in nos registradores
+	#loades the value of blk_in to the registers
 	lw a4, 0(a0)
 	lw a5, 4(a0)
 	lw a6, 8(a0)
 	lw a7, 12(a0)
 	
 	jal idea_round	
+	
 idea_round:
-	#carrega os valores de blk_in em cada word 
+	#loades the values of blk_in in separate words
 	add t1, zero, a4
 	add t2, zero, a5
 	add t3, zero, a6
@@ -117,13 +117,6 @@ x_greater:
 	ret 
 
 print_values:
-
-
-    # Print "Saida[i] = "
-    li a7, 4   # System call number for printing a string
-    la a0, str  # Load the address of the string
-    li a1, 10  # Length of the string
-    ecall
     	lw a2, 0(a1)  
     	mv a0, a2  
     	li a7, 1   
@@ -133,5 +126,4 @@ print_values:
     	li t1, 4  
     	blt t0, t1, print_values
 	j exit
-
 exit:
