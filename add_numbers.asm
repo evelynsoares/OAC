@@ -1,5 +1,5 @@
 .data #segmentos de dados, para armazenr na memória
-x:	.word 33 #
+x:	.word 33 
 y:	.word 99
 
 .text #segmentos de código
