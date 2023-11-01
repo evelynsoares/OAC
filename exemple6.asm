@@ -27,4 +27,4 @@ lsw16: #a's e t's
 	la a1, msk
 	lw a1, 0(a1)
 	and a0, a0, a1
-	ret#botar o resultado onde quer e dar o return
+	ret #botar o resultado onde quer e dar o return
